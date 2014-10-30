@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Xna.Framework;
+using System;
 
 namespace AStar
 {
-    class Map
+	/// <summary>
+	/// This is the actual 2d map as loaded from file or whatever.
+	/// </summary>
+    public class Map
     {
         private int[,] map;
         private int height;
