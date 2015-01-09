@@ -7,7 +7,7 @@ namespace AStar
 	/// <summary>
 	/// A class used to find a path on a map.
 	/// </summary>
-	class Pathfinder
+	public class Pathfinder
 	{
 		#region Properties
 
@@ -36,7 +36,7 @@ namespace AStar
 		/// Constructor!!!
 		/// </summary>
 		/// <param name="map">The map this object will be used to find paths on </param>
-		public Pathfinder(Map map)
+		public Pathfinder(IMap map)
 		{
 			//grab the height and width of the map
 			width = map.Width;
@@ -52,7 +52,7 @@ namespace AStar
 		/// Set up the map with all the search nodes, and let each node find it's neighbors
 		/// </summary>
 		/// <param name="map"></param>
-		private void InitializeSearchNodes(Map map)
+		private void InitializeSearchNodes(IMap map)
 		{
 			CreateSearchNodes(map);
 
@@ -63,7 +63,7 @@ namespace AStar
 		/// Given a map, create a searchable node at each walkable position.
 		/// </summary>
 		/// <param name="map"></param>
-		private void CreateSearchNodes(Map map)
+		private void CreateSearchNodes(IMap map)
 		{
 			//loop through the whole map and create nodes at each walkable position
 			for (int x = 0; x < width; x++)

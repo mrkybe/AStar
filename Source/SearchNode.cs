@@ -5,7 +5,7 @@ namespace AStar
 	/// <summary>
 	/// This is a node that keeps track of where the connecting nodes are all located.
 	/// </summary>
-    class SearchNode
+	class SearchNode
 	{
 		#region Properties
 
@@ -14,10 +14,10 @@ namespace AStar
 		/// null when search is started, and set during path finding phase.
 		/// </summary>
 		public SearchNode Parent { get; set; }
-        public bool InOpenList;
-        public bool InClosedList;
-        public float DistanceToGoal;
-        public float DistanceTraveled;
+		public bool InOpenList;
+		public bool InClosedList;
+		public float DistanceToGoal;
+		public float DistanceTraveled;
 
 		/// <summary>
 		/// Where this node is located.
