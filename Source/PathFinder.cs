@@ -12,6 +12,21 @@ namespace AStar
 		#region Properties
 
 		/// <summary>
+		/// The point we want the path to start from
+		/// </summary>
+		public Point Start { get; private set; }
+
+		/// <summary>
+		/// The point we want the path to end at
+		/// </summary>
+		public Point End { get; private set; }
+
+		/// <summary>
+		/// A list of points leading from start to end.
+		/// </summary>
+		public List<Point> Path { get; private set; }
+
+		/// <summary>
 		/// A 2d array of all the walkable nodes in teh map.
 		/// </summary>
 		private readonly SearchNode[,] searchNodes;
@@ -41,6 +56,9 @@ namespace AStar
 			//grab the height and width of the map
 			width = map.Width;
 			height = map.Height;
+
+			//initialize to an empty list until findpath is called
+			Path = new List<Point>();
 
 			//Create an empty array of nodes the smae size as the map
 			searchNodes = new SearchNode[width, height];
@@ -147,9 +165,23 @@ namespace AStar
 		/// </summary>
 		/// <param name="startPoint">the start point on the map</param>
 		/// <param name="endPoint">the end point on the map</param>
-		/// <returns>a list containing the path from start to end.  Contains every point, not just way points</returns>
-		public List<Point> FindPath(Point startPoint, Point endPoint)
+		public void FindPath(Point startPoint, Point endPoint)
 		{
+			Path = CalculatePath(startPoint, endPoint);
+		}
+
+		/// <summary>
+		/// Find the optimal path between two points on our map.
+		/// </summary>
+		/// <param name="startPoint">the start point on the map</param>
+		/// <param name="endPoint">the end point on the map</param>
+		/// <returns>a list containing the path from start to end.  Contains every point, not just way points</returns>
+		private List<Point> CalculatePath(Point startPoint, Point endPoint)
+		{
+			//get the points...
+			Start = startPoint;
+			End = endPoint;
+
 			//if they are the same point...
 			if (startPoint == endPoint)
 			{
@@ -162,6 +194,12 @@ namespace AStar
 			//Store references to start and end nodes for convience.
 			SearchNode startNode = searchNodes[startPoint.X, startPoint.Y];
 			SearchNode endNode = searchNodes[endPoint.X, endPoint.Y];
+
+			//if start the search on a blocked point, this will be null
+			if (startNode == null)
+			{
+				return new List<Point>();
+			}
 
 			//Set the start node's G value to 0 and its F value to the estimated distance between the start node and goal node.
 			startNode.DistanceTraveled = 0;
